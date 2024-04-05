@@ -72,3 +72,7 @@ function prettyBoard() {
    * Подумай, как симпатичнее его вывести.
    */
 }
+
+module.exports = {
+  solve
+};
