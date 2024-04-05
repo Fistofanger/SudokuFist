@@ -15,7 +15,7 @@ function read(match) {
 
   //playngField - игровое поле, двумерный массив, где вложенные масивы это строки по 9 элементов
   let playingField = [];
-  for (var i = 0; i < arrSudoku.length; i += 9) {
+  for (let i = 0; i < arrSudoku.length; i += 9) {
     playingField.push(arrSudoku.slice(i, i + 9));
   }
   return playingField;
@@ -27,14 +27,84 @@ function solve() {
    * Возвращает игровое поле после попытки его решить.
    */
 }
-console.log(solve());
-function isSolved() {
-  /*
-   * Принимает игровое поле в том формате, в котором его вернули из функции solve.
-   * Возвращает булевое значение — решено это игровое поле или нет.
-   */
-}
 
+function isSolved(num) {
+  let arrSlove = solve(num);
+
+  let newArrSlove = [];
+  for (let el of arrSlove) {
+    for (let i = 0; i < el.length; i += 3) {
+      newArrSlove.push(el.slice(i, i + 3));
+    }
+  }
+
+  let resultHorizon;
+  for (let i = 0; i <= 3; i += 3) {
+    if (
+      newArrSlove[i].join("") !== newArrSlove[i + 1].join("") &&
+      newArrSlove[i].join("") !== newArrSlove[i + 2].join("") &&
+      newArrSlove[i + 1].join("") !== newArrSlove[i + 2].join("")
+    ) {
+      resultHorizon = true;
+    } else {
+      resultHorizon = false;
+    }
+  }
+
+  let resultVertical;
+  for (let i = 0; i <= 3; i += 1) {
+    if (
+      newArrSlove[i].join("") !== newArrSlove[i + 3].join("") &&
+      newArrSlove[i].join("") !== newArrSlove[i + 6].join("") &&
+      newArrSlove[i + 3].join("") !== newArrSlove[i + 9].join("")
+    ) {
+      resultVertical = true;
+    } else {
+      resultVertical = false;
+    }
+  }
+
+  if (resultVertical && resultHorizon) {
+    return arrSlove;
+  } else {
+    solve(num);
+  }
+  //   for (let i = 0; i < newArrSlove.length; i += 3) {
+  //     if (
+  //       newArrSlove[i].join("") !== newArrSlove[i + 1].join("") &&
+  //       newArrSlove[i].join("") !== newArrSlove[i + 2].join("") &&
+  //       newArrSlove[i + 1].join("") !== newArrSlove[i + 2].join("")
+  //     ) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  // }
+
+  //playngField - игровое поле, двумерный массив, где вложенные масивы это строки по 9 элементов
+  // let playingField = [];
+  // for (let i = 0; i < arrSudoku.length; i += 9) {
+  //   playingField.push(arrSudoku.slice(i, i + 9));
+  // }
+
+  //проверка по горизонтали
+  // for (let el of arrSlove) {
+  //   let filter = [...new Set(el)];
+  //   console.log(filter);
+  //   if (filter.join("") === el.join("")) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+}
+isSolved();
+/*
+ * Принимает игровое поле в том формате, в котором его вернули из функции solve.
+ * Возвращает булевое значение — решено это игровое поле или нет.
+ */
+
+// console.log(isSolved());
 function prettyBoard() {
   /*
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
