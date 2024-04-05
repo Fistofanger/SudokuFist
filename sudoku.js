@@ -1,10 +1,28 @@
-function read() {
-  /**
-   * Прочесть файл puzzles.txt в кодировке 'utf-8' и вернуть эти данные из функции
-   */
+function read(match) {
+  const fs = require("fs");
+  const { EOL } = require("os");
+  const puzzlesTxt = fs.readFileSync("./puzzles.txt", "utf-8");
+
+  //arrPuzzles - одномерный массивб каждый элемент это строка из puzzle.txt
+  const arrPuzzles = puzzlesTxt.split(EOL);
+
+  //arrSudoku - массив где каждый элемент это одно значение всего судоку (81 элемент)
+  let arrSudoku;
+  for (let i = 0; i <= arrPuzzles.length; i += 1) {
+    arrSudoku = arrPuzzles[match - 1].split("");
+    break;
+  }
+
+  //playngField - игровое поле, двумерный массив, где вложенные масивы это строки по 9 элементов
+  let playingField = [];
+  for (var i = 0; i < arrSudoku.length; i += 9) {
+    playingField.push(arrSudoku.slice(i, i + 9));
+  }
+  return playingField;
 }
 
 function solve() {
+
   const arr = read(5);
   let etalon = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   // const test = arr.join(",").split(",");
@@ -32,12 +50,9 @@ function solve() {
   return askArrSolved;
 
   /**
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
-}
 
-solve();
+  /*
+
 function isSolved() {
   let etalon = [
     ["1", "2", "3"],
@@ -45,13 +60,18 @@ function isSolved() {
     ["7", "8", "9"],
   ];
   /**
+
+console.log(solve());
+function isSolved() {
+  /*
+
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Возвращает булевое значение — решено это игровое поле или нет.
    */
 }
 
 function prettyBoard() {
-  /**
+  /*
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Выводит в консоль/терминал судоку.
    * Подумай, как симпатичнее его вывести.
