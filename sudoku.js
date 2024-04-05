@@ -88,13 +88,13 @@ function isSolved(num) {
   }
 
   if (resultVertical && resultHorizon) {
-    return arrSlove;
+    return true;
   } else {
     solve(num);
   }
 }
 
-function isSolved() {
+function isSolved() {}
   
 
 
