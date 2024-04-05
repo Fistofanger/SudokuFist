@@ -21,8 +21,8 @@ function read(match) {
   return playingField;
 }
 
-function solve() {
-  const arr = read(5);
+function solve(num) {
+  const arr = read(num);
   const askArrSolved = [];
   for (let i = 0; i < arr.length; i += 1) {
     let etalon = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
