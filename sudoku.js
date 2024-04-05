@@ -108,5 +108,5 @@ function prettyBoard() {
 }
 
 module.exports = {
-  isSolved
+  solve
 };
