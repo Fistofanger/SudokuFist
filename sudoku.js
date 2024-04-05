@@ -22,12 +22,11 @@ function read(match) {
 }
 
 function solve() {
-
   const arr = read(5);
-  let etalon = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  // const test = arr.join(",").split(",");
-  const askArrSolved = arr.map((el) =>
-    el
+  const askArrSolved = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    let etalon = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    askArrSolved[i] = arr[i]
       .map((el) => {
         if (el !== "-") {
           etalon.splice(etalon.indexOf(el), 1);
@@ -45,20 +44,16 @@ function solve() {
         } else {
           return el;
         }
-      })
-  );
+      });
+  }
+
   return askArrSolved;
+}
 
-  /**
-
-  /*
+/*
 
 function isSolved() {
-  let etalon = [
-    ["1", "2", "3"],
-    ["4", "5", "6"],
-    ["7", "8", "9"],
-  ];
+  
   /**
 
 console.log(solve());
@@ -68,7 +63,7 @@ function isSolved() {
    * Принимает игровое поле в том формате, в котором его вернули из функции solve.
    * Возвращает булевое значение — решено это игровое поле или нет.
    */
-}
+//}
 
 function prettyBoard() {
   /*
