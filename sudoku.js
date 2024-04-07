@@ -21,12 +21,35 @@ function read(match) {
   return playingField;
 }
 
-function solve() {
-  /*
-   * Принимает игровое поле в том формате, в котором его вернули из функции read.
-   * Возвращает игровое поле после попытки его решить.
-   */
+function solve(num) {
+  const arr = read(num);
+  const askArrSolved = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    let etalon = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    askArrSolved[i] = arr[i]
+      .map((el) => {
+        if (el !== "-") {
+          etalon.splice(etalon.indexOf(el), 1);
+          return el;
+        } else {
+          return el;
+        }
+      })
+      .map((el) => {
+        if (el === "-") {
+          let index = Math.floor(Math.random() * etalon.length);
+          el = etalon[index];
+          etalon.splice(index, 1);
+          return el;
+        } else {
+          return el;
+        }
+      });
+  }
+
+  return askArrSolved;
 }
+
 
 function isSolved(num) {
   let arrSlove = solve(num);
@@ -65,44 +88,15 @@ function isSolved(num) {
   }
 
   if (resultVertical && resultHorizon) {
-    return arrSlove;
+    return true;
   } else {
     solve(num);
   }
-  //   for (let i = 0; i < newArrSlove.length; i += 3) {
-  //     if (
-  //       newArrSlove[i].join("") !== newArrSlove[i + 1].join("") &&
-  //       newArrSlove[i].join("") !== newArrSlove[i + 2].join("") &&
-  //       newArrSlove[i + 1].join("") !== newArrSlove[i + 2].join("")
-  //     ) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  // }
-
-  //playngField - игровое поле, двумерный массив, где вложенные масивы это строки по 9 элементов
-  // let playingField = [];
-  // for (let i = 0; i < arrSudoku.length; i += 9) {
-  //   playingField.push(arrSudoku.slice(i, i + 9));
-  // }
-
-  //проверка по горизонтали
-  // for (let el of arrSlove) {
-  //   let filter = [...new Set(el)];
-  //   console.log(filter);
-  //   if (filter.join("") === el.join("")) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 }
-isSolved();
-/*
- * Принимает игровое поле в том формате, в котором его вернули из функции solve.
- * Возвращает булевое значение — решено это игровое поле или нет.
- */
+
+function isSolved() {}
+  
+
 
 // console.log(isSolved());
 function prettyBoard() {
@@ -112,3 +106,7 @@ function prettyBoard() {
    * Подумай, как симпатичнее его вывести.
    */
 }
+
+module.exports = {
+  solve
+};
